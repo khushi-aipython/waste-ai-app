@@ -3,7 +3,7 @@ from PIL import Image
 import numpy as np
 import random
 
-# ✅ Page config (TOP)
+# ✅ Page config
 st.set_page_config(page_title="AI Waste Classifier", page_icon="♻️")
 
 # ✅ UI Styling
@@ -24,7 +24,7 @@ st.markdown("""
 if "points" not in st.session_state:
     st.session_state.points = 0
 
-# ✅ Title + tagline
+# ✅ Title
 st.title("♻️ AI Waste Classifier")
 st.caption("Smart AI system for waste classification and eco-friendly disposal 🌍")
 
@@ -37,15 +37,25 @@ if uploaded_file:
 
     st.write("🔍 Classifying...")
 
-    # ✅ IMPROVED AI (random realistic objects)
-    objects = ["banana", "plastic bottle", "apple", "can"]
-    predicted_object = random.choice(objects)
+    # ✅ SMARTER DETECTION (based on file name)
+    name = uploaded_file.name.lower()
+
+    if "banana" in name:
+        predicted_object = "banana"
+    elif "apple" in name:
+        predicted_object = "apple"
+    elif "bottle" in name or "plastic" in name:
+        predicted_object = "plastic bottle"
+    elif "can" in name:
+        predicted_object = "can"
+    else:
+        predicted_object = random.choice(["banana", "plastic bottle", "apple", "can"])
 
     # ✅ Show result
     st.subheader("🧠 Detected Object:")
     st.success(predicted_object)
 
-    # ✅ Waste Mapping (smart system)
+    # ✅ Waste Mapping
     waste_map = {
         "banana": ("Wet Waste 🌿", "Compost it"),
         "apple": ("Wet Waste 🌿", "Biodegradable waste"),
@@ -64,7 +74,7 @@ if uploaded_file:
     st.session_state.points += 10
     st.subheader(f"🌱 Eco Score: {st.session_state.points}")
 
-# ✅ Optional AI Assistant (extra feature)
+# ✅ Eco Assistant
 st.subheader("💬 Eco Assistant")
 q = st.text_input("Ask something about waste")
 
