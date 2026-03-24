@@ -1,84 +1,102 @@
-# waste-ai-app
-Hack-app
-import streamlit as st
-from PIL import Image
-import numpy as np
-import random
+# ♻️ AI Waste Classifier (Greenovation)
 
-# ✅ Page config
-st.set_page_config(page_title="AI Waste Classifier", page_icon="♻️")
+## 🌍 Overview
 
-# ✅ UI Styling
-st.markdown("""
-    <style>
-    .main {
-        background-color: #0E1117;
-    }
-    .stButton>button {
-        background-color: #00c853;
-        color: white;
-        border-radius: 10px;
-    }
-    </style>
-""", unsafe_allow_html=True)
+AI Waste Classifier is a web-based application that helps users identify waste types and provides smart disposal suggestions to promote eco-friendly habits.
 
-# ✅ Eco Points
-if "points" not in st.session_state:
-    st.session_state.points = 0
+This project aims to make waste segregation easier and encourage sustainable living through an interactive and user-friendly interface.
 
-# ✅ Title
-st.title("♻️ AI Waste Classifier")
-st.caption("Smart AI system for waste classification and eco-friendly disposal 🌍")
+---
 
-# ✅ Upload
-uploaded_file = st.file_uploader("Upload Image", type=["jpg", "png"])
+## 🚀 Features
 
-if uploaded_file:
-    image = Image.open(uploaded_file)
-    st.image(image, caption="Uploaded Image", use_column_width=True)
+* 📤 Upload an image of waste
+* 🤖 AI-based object detection (simulated for demo)
+* ♻️ Waste classification:
 
-    st.write("🔍 Classifying...")
+  * Wet Waste 🌿
+  * Dry Waste 📦
+  * Recyclable ♻️
+  * Hazardous ☣️
+* 💡 Smart disposal suggestions
+* 🌱 Eco Score system (gamification)
+* 💬 Eco Assistant (basic Q&A support)
 
-    # ✅ SMARTER DETECTION (based on file name)
-    name = uploaded_file.name.lower()
+---
 
-    if "banana" in name:
-        predicted_object = "banana"
-    elif "apple" in name:
-        predicted_object = "apple"
-    elif "bottle" in name or "plastic" in name:
-        predicted_object = "plastic bottle"
-    elif "can" in name:
-        predicted_object = "can"
-    else:
-        predicted_object = random.choice(["banana", "plastic bottle", "apple", "can"])
+## 🧠 How It Works
 
-    # ✅ Show result
-    st.subheader("🧠 Detected Object:")
-    st.success(predicted_object)
+1. User uploads an image
+2. The system detects the object (simulated AI logic)
+3. The object is mapped to a waste category
+4. The app suggests proper disposal methods
+5. User earns eco points for awareness
 
-    # ✅ Waste Mapping
-    waste_map = {
-        "banana": ("Wet Waste 🌿", "Compost it"),
-        "apple": ("Wet Waste 🌿", "Biodegradable waste"),
-        "plastic bottle": ("Recyclable ♻️", "Put in recycling bin"),
-        "can": ("Recyclable ♻️", "Metal recycling"),
-    }
+---
 
-    # ✅ Suggestion
-    st.subheader("♻️ Disposal Suggestion")
+## 🛠️ Tech Stack
 
-    category, advice = waste_map[predicted_object]
-    st.success(category)
-    st.info(advice)
+* Python 🐍
+* Streamlit 🌐
+* Pillow (Image Processing)
+* NumPy
 
-    # ✅ Eco Points
-    st.session_state.points += 10
-    st.subheader(f"🌱 Eco Score: {st.session_state.points}")
+---
 
-# ✅ Eco Assistant
-st.subheader("💬 Eco Assistant")
-q = st.text_input("Ask something about waste")
+## ⚙️ Installation & Setup
 
-if q:
-    st.write("👉 Use recycling or compost based on material ♻️")
+1. Install dependencies:
+
+   ```
+   pip install streamlit pillow numpy
+   ```
+
+2. Run the app:
+
+   ```
+   python -m streamlit run app.py
+   ```
+
+3. Open in browser:
+
+   ```
+   http://localhost:8501
+   ```
+
+---
+
+## 🎯 Future Improvements
+
+* Integrate real AI model (TensorFlow / PyTorch)
+* Add real-time camera detection
+* Connect to nearby recycling centers
+* User login and leaderboard system
+* Mobile app version
+
+---
+
+## 🧪 Note
+
+Due to time constraints, the AI detection is simulated. However, the system is designed to integrate real machine learning models easily.
+
+---
+
+## 👨‍💻 Team
+
+* Developed for Greenovation Hackathon 🌱
+
+---
+
+## 💡 Inspiration
+
+To solve real-world waste management issues and promote sustainable practices using technology.
+
+---
+
+## 📢 Conclusion
+
+This project demonstrates how AI and simple web technologies can be combined to create impactful environmental solutions.
+
+---
+
+⭐ If you like this project, feel free to explore and improve it!
